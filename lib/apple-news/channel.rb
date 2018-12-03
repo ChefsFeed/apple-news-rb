@@ -2,6 +2,7 @@ module AppleNews
   class Channel
     include Resource
     include Links
+    include AppleNews::ArticleCommonMethods
 
     attr_reader :id, :type, :name, :website, :links, :created_at, :modified_at,
                 :default_section, :share_url
@@ -31,15 +32,8 @@ module AppleNews
       end
     end
 
-    #FIXME: factor out and reuse from Section
-    def articles(params = {})
-      params  = params.with_indifferent_access
-      hydrate = params.delete(:hydrate)
-      resp = get_request("/channels/#{id}/articles", params)
-      resp['data'].map do |article|
-        data = hydrate == false ? article : {}
-        Article.new(article['id'], data, config)
-      end
+    def url_base_part
+      'channels'
     end
   end
 end
