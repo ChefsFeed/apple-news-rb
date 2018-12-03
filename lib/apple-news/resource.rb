@@ -14,7 +14,7 @@ module AppleNews
       end
 
       def get_request(path, params = {})
-        AppleNews::Request::Get.new(path, config).call(params)
+        AppleNews::Request::Get.new(path, params, config).call
       end
 
       private
