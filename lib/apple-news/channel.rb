@@ -31,6 +31,7 @@ module AppleNews
       end
     end
 
+    #FIXME: factor out and reuse from Section
     def articles(params = {})
       params  = params.with_indifferent_access
       hydrate = params.delete(:hydrate)
